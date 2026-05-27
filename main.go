@@ -5,18 +5,28 @@ import (
 	"os"
 
 	"github.com/0xlichi/govenom/input"
+	"github.com/0xlichi/govenom/output"
 	"github.com/0xlichi/govenom/ping"
+	"github.com/0xlichi/govenom/ui/banner"
 )
+
+func init() {
+	banner.GetBanner()
+}
 
 func main() {
 	// Get hostname/IP from input package
 	host := input.GetHost()
 
-	// Check rechability
+	// Check reachability
 	if !ping.CheckHost(host) {
-		fmt.Printf("Host '%v' is not rechable\n", host)
+		fmt.Println(
+			output.Error(fmt.Sprintf("Host '%v' is not reachable.", host)),
+		)
 		os.Exit(1)
 	}
 
-	fmt.Printf("Host '%v' is rechable\n", host)
+	fmt.Println(
+		output.Success(fmt.Sprintf("Host '%v' is reachable.", host)),
+	)
 }

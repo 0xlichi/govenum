@@ -1,0 +1,23 @@
+// Package banner
+package banner
+
+import (
+	"fmt"
+
+	colors "github.com/0xlichi/govenom/output"
+)
+
+func GetBanner() {
+	const banner = `
+ ██████╗  ██████╗ ██╗   ██╗███████╗███╗   ██╗ ██████╗ ███╗   ███╗
+██╔════╝ ██╔═══██╗██║   ██║██╔════╝████╗  ██║██╔═══██╗████╗ ████║
+██║  ███╗██║   ██║██║   ██║█████╗  ██╔██╗ ██║██║   ██║██╔████╔██║
+██║   ██║██║   ██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║██║   ██║██║╚██╔╝██║
+╚██████╔╝╚██████╔╝ ╚████╔╝ ███████╗██║ ╚████║╚██████╔╝██║ ╚═╝ ██║
+ ╚═════╝  ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝
+
+A fast, concurrent, automated bug bounty reconnaissance tool written in Go.
+Author: 0xlichi
+	`
+	fmt.Println(colors.CyanColor(banner))
+}
