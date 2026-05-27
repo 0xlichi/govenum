@@ -18,11 +18,11 @@ func Subfinder(host string) error {
 	}
 
 	lines := strings.Split(strings.TrimSpace(string(out)), "\n")
-	if err := logger.Save(host, "unfiltered-subdomains", lines); err != nil {
+	if err := logger.Save(host, "subdomains/unfiltered-subdomains", lines); err != nil {
 		fmt.Println(output.Error(fmt.Sprintf("Failed to save subfinder output: %v", err)))
 		return err
 	}
 
-	fmt.Println(output.Success("subfinder done. Output saved to logs/" + host + "/unfiltered-subdomains.txt"))
+	fmt.Println(output.Success("subfinder done. Output saved to logs/" + host + "/subdomains/unfiltered-subdomains.txt"))
 	return nil
 }
