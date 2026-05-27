@@ -2,7 +2,7 @@
 package output
 
 func Success(text string) string {
-	return BoldGreenColor("[+] " + text)
+	return BoldGreenColor("\n[+] " + text)
 }
 
 func Error(text string) string {

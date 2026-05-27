@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/0xlichi/govenom/input"
@@ -28,8 +29,15 @@ func main() {
 
 	startTime := time.Now()
 
-	subenum.Subfinder(host)
-	netscanning.Nmap(host)
+	var wg sync.WaitGroup
+
+	fmt.Println(output.Info("Running subfinder..."))
+	fmt.Println(output.Info("Running nmap..."))
+
+	wg.Add(2)
+	go func() { defer wg.Done(); subenum.Subfinder(host) }()
+	go func() { defer wg.Done(); netscanning.Nmap(host) }()
+	wg.Wait()
 
 	fmt.Println(output.Info(fmt.Sprintf("Execution done in %v", time.Since(startTime))))
 }
