@@ -13,7 +13,7 @@ import (
 func Whois(host string) error {
 	// Skip if output already exist
 	if logger.Exists(host, "whois-result") {
-		fmt.Println(output.Warning("whois: output already exist, skipping."))
+		fmt.Println(output.Success("whois: output already exist, skipping."))
 		return nil
 	}
 
@@ -21,7 +21,7 @@ func Whois(host string) error {
 	out, err := exec.Command("whois", host, "--version").Output()
 	if err != nil {
 		fmt.Println(output.Error(fmt.Sprintf("whois failed: %v", err)))
-		fmt.Println(output.Warning("Failed to run whois, manaul investigation needed."))
+		fmt.Println(output.Error("Failed to run whois, manaul investigation needed."))
 		return err
 	}
 

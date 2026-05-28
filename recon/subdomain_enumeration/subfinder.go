@@ -13,7 +13,7 @@ import (
 func Subfinder(host string) error {
 	// Skip if output already exists
 	if logger.Exists(host, "subfinder-result") {
-		fmt.Println(output.Warning("subfinder: output already exists, skipping."))
+		fmt.Println(output.Success("subfinder: output already exists, skipping."))
 		return nil
 	}
 
@@ -21,7 +21,7 @@ func Subfinder(host string) error {
 	out, err := exec.Command("subfinder", "-d", host, "-silent").Output()
 	if err != nil {
 		fmt.Println(output.Error(fmt.Sprintf("subfinder failed: %v", err)))
-		fmt.Println(output.Warning("Failed to run subfinder, manual investigation needed."))
+		fmt.Println(output.Error("Failed to run subfinder, manual investigation needed."))
 		return err
 	}
 
