@@ -25,7 +25,7 @@ func main() {
 		fmt.Println(output.Error(fmt.Sprintf("Host '%v' is not reachable.", host)))
 		os.Exit(1)
 	}
-	fmt.Println(output.Success(fmt.Sprintf("Host '%v' is reachable.\n", host)))
+	fmt.Println(output.Success(fmt.Sprintf("Host '%v' is reachable.", host)))
 
 	startTime := time.Now()
 

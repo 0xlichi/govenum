@@ -19,5 +19,5 @@ func GetBanner() {
 A fast, concurrent, automated bug bounty reconnaissance tool written in Go.
 Author: 0xlichi
 	`
-	fmt.Println(colors.CyanColor(banner))
+	fmt.Println(colors.BoldRedColor(banner))
 }
