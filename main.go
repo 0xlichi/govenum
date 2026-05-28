@@ -26,7 +26,7 @@ func main() {
 		fmt.Println(output.Error(fmt.Sprintf("Host '%v' is not reachable.", host)))
 		os.Exit(1)
 	}
-	fmt.Println(output.Success(fmt.Sprintf("Host '%v' is reachable.", host)))
+	fmt.Println(output.Success(fmt.Sprintf("Host '%v' is reachable.\n", host)))
 
 	startTime := time.Now()
 
@@ -34,13 +34,17 @@ func main() {
 
 	fmt.Println(output.Info("Initializing subfinder..."))
 	fmt.Println(output.Info("Initializing nmap..."))
-	fmt.Println(output.Info("Initializing wafw00f"))
+	fmt.Println(output.Info("Initializing wafw00f..."))
+	fmt.Println(output.Info("Initializing gospider..."))
 
-	wg.Add(3)
+	output.NewLine()
+	wg.Add(4)
 	go func() { defer wg.Done(); subenum.Subfinder(host) }()
 	go func() { defer wg.Done(); netscanning.Nmap(host) }()
 	go func() { defer wg.Done(); webvuln.Wafw00f(host) }()
+	go func() { defer wg.Done(); webvuln.Gospider(host) }()
 	wg.Wait()
 
+	output.NewLine()
 	fmt.Println(output.Info(fmt.Sprintf("Execution done in %v", time.Since(startTime))))
 }
