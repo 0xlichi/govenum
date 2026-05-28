@@ -12,7 +12,7 @@ import (
 
 func Subfinder(host string) error {
 	// Skip if output already exists
-	if logger.Exists(host, "nmap/nmap-results") {
+	if logger.Exists(host, "subfinder-result") {
 		fmt.Println(output.Warning("subfinder: output already exists, skipping."))
 		return nil
 	}
@@ -27,11 +27,11 @@ func Subfinder(host string) error {
 
 	// Split output into lines and save as-is
 	lines := strings.Split(strings.TrimSpace(string(out)), "\n")
-	if err := logger.Save(host, "subdomains/unfiltered-subdomains", lines); err != nil {
+	if err := logger.Save(host, "subfinder-result", lines); err != nil {
 		fmt.Println(output.Error(fmt.Sprintf("Failed to save subfinder output: %v", err)))
 		return err
 	}
 
-	fmt.Println(output.Success("subfinder done. Output saved to logs/" + host + "/subdomains/unfiltered-subdomains.txt"))
+	fmt.Println(output.Success("subfinder done. Output saved to logs/" + host + "subfinder-result.txt"))
 	return nil
 }
