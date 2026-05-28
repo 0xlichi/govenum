@@ -12,7 +12,7 @@ import (
 
 func Nmap(host string) error {
 	// Skip if output already exists
-	if logger.Exists(host, "nmap/nmap-results") {
+	if logger.Exists(host, "nmap/nmap-result") {
 		fmt.Println(output.Warning("nmap: output already exists, skipping."))
 		return nil
 	}
@@ -27,11 +27,11 @@ func Nmap(host string) error {
 
 	// Split output into lines and save as-is
 	lines := strings.Split(strings.TrimSpace(string(out)), "\n")
-	if err := logger.SaveRaw(host, "nmap/nmap-results", lines); err != nil {
+	if err := logger.SaveRaw(host, "nmap/nmap-result", lines); err != nil {
 		fmt.Println(output.Error(fmt.Sprintf("Failed to save nmap output: %v", err)))
 		return err
 	}
 
-	fmt.Println(output.Success("nmap done. Output saved to logs/" + host + "/nmap/nmap-results.txt"))
+	fmt.Println(output.Success("nmap done. Output saved to logs/" + host + "/nmap/nmap-result.txt"))
 	return nil
 }

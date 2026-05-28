@@ -12,7 +12,7 @@ import (
 
 func Wafw00f(host string) error {
 	// Skip if output already exists
-	if logger.Exists(host, "nmap/nmap-results") {
+	if logger.Exists(host, "wafw00f/wafw00f-result") {
 		fmt.Println(output.Warning("wafw00f: output already exists, skipping."))
 		return nil
 	}

@@ -1,6 +1,8 @@
 // Package output
 package output
 
+import "fmt"
+
 func Success(text string) string {
 	return BoldGreenColor("[+] " + text)
 }
@@ -15,4 +17,8 @@ func Warning(text string) string {
 
 func Info(text string) string {
 	return BlueColor("[*] " + text)
+}
+
+func NewLine() {
+	fmt.Println()
 }
