@@ -1,5 +1,5 @@
-// Package webvuln
-package webvuln
+// Package webrecon
+package webrecon
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 
 func Wafw00f(host string) error {
 	// Skip if output already exists
-	if logger.Exists(host, "wafw00f/wafw00f-result") {
+	if logger.Exists(host, "wafw00f-result") {
 		fmt.Println(output.Warning("wafw00f: output already exists, skipping."))
 		return nil
 	}
@@ -27,11 +27,11 @@ func Wafw00f(host string) error {
 
 	// Split output into lines and save as-is (order matters for nmap output)
 	lines := strings.Split(strings.TrimSpace(string(out)), "\n")
-	if err := logger.SaveRaw(host, "wafw00f/wafw00f-result", lines); err != nil {
+	if err := logger.SaveRaw(host, "wafw00f-result", lines); err != nil {
 		fmt.Println(output.Error(fmt.Sprintf("Failed to save wafw00f output: %v", err)))
 		return err
 	}
 
-	fmt.Println(output.Success("wafw00f done. Output saved  to logs/" + host + "/wafw00f/wafw00f-result.txt"))
+	fmt.Println(output.Success("wafw00f done. Output saved  to logs/" + host + "wafw00f-result.txt"))
 	return nil
 }

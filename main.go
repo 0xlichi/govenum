@@ -9,9 +9,10 @@ import (
 	"github.com/0xlichi/govenom/input"
 	"github.com/0xlichi/govenom/output"
 	"github.com/0xlichi/govenom/ping"
+	dnsrecon "github.com/0xlichi/govenom/reconnaissance/dns"
 	netscanning "github.com/0xlichi/govenom/reconnaissance/network"
 	subenum "github.com/0xlichi/govenom/reconnaissance/subdomain_enumeration"
-	webvuln "github.com/0xlichi/govenom/reconnaissance/web"
+	webrecon "github.com/0xlichi/govenom/reconnaissance/web"
 	"github.com/0xlichi/govenom/ui/banner"
 )
 
@@ -36,13 +37,15 @@ func main() {
 	fmt.Println(output.Info("Initializing nmap..."))
 	fmt.Println(output.Info("Initializing wafw00f..."))
 	fmt.Println(output.Info("Initializing gospider..."))
+	fmt.Println(output.Info("Initializing whois..."))
 
 	output.NewLine()
-	wg.Add(4)
+	wg.Add(5)
 	go func() { defer wg.Done(); subenum.Subfinder(host) }()
 	go func() { defer wg.Done(); netscanning.Nmap(host) }()
-	go func() { defer wg.Done(); webvuln.Wafw00f(host) }()
-	go func() { defer wg.Done(); webvuln.Gospider(host) }()
+	go func() { defer wg.Done(); webrecon.Wafw00f(host) }()
+	go func() { defer wg.Done(); webrecon.Gospider(host) }()
+	go func() { defer wg.Done(); dnsrecon.Whois(host) }()
 	wg.Wait()
 
 	output.NewLine()

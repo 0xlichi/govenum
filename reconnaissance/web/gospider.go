@@ -1,5 +1,5 @@
-// Package webvuln
-package webvuln
+// Package webrecon
+package webrecon
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 
 func Gospider(host string) error {
 	// Skip if output already exists
-	if logger.Exists(host, "gospider/gospider-result") {
+	if logger.Exists(host, "gospider-result") {
 		fmt.Println(output.Warning("gospider: output already exists, skipping."))
 		return nil
 	}
@@ -27,11 +27,11 @@ func Gospider(host string) error {
 
 	// Split output into lines and save as-is
 	lines := strings.Split(strings.TrimSpace(string(out)), "\n")
-	if err := logger.SaveRaw(host, "gospider/gospider-result", lines); err != nil {
+	if err := logger.SaveRaw(host, "gospider-result", lines); err != nil {
 		fmt.Println(output.Error(fmt.Sprintf("Failed to save gospider output: %v", err)))
 		return err
 	}
 
-	fmt.Println(output.Success("gospider done. Output saved to logs/" + host + "/gospider/gospider-result.txt"))
+	fmt.Println(output.Success("gospider done. Output saved to logs/" + host + "gospider-result.txt"))
 	return nil
 }
