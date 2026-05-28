@@ -11,6 +11,7 @@ import (
 	"github.com/0xlichi/govenom/ping"
 	netscanning "github.com/0xlichi/govenom/reconnaissance/network"
 	subenum "github.com/0xlichi/govenom/reconnaissance/subdomain_enumeration"
+	webvuln "github.com/0xlichi/govenom/reconnaissance/web"
 	"github.com/0xlichi/govenom/ui/banner"
 )
 
@@ -34,9 +35,10 @@ func main() {
 	fmt.Println(output.Info("Running subfinder..."))
 	fmt.Println(output.Info("Running nmap..."))
 
-	wg.Add(2)
+	wg.Add(3)
 	go func() { defer wg.Done(); subenum.Subfinder(host) }()
 	go func() { defer wg.Done(); netscanning.Nmap(host) }()
+	go func() { defer wg.Done(); webvuln.Wafw00f(host) }()
 	wg.Wait()
 
 	fmt.Println(output.Info(fmt.Sprintf("Execution done in %v", time.Since(startTime))))
